@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	//"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -28,10 +27,10 @@ type Parameters struct {
 }
 
 type ParamsAnswer struct {
-	a       int `json:"A"`
-	b       int `json:"B"`
-	c       int `json:"C"`
-	n_roots int `json:"N_Roots"`
+	A      int `json:"A"`
+	B      int `json:"B"`
+	C      int `json:"C"`
+	Nroots int `json:"N_Roots"`
 }
 
 var ParamsAnswers []ParamsAnswer
@@ -64,28 +63,28 @@ func CalcResult() {
 	b := Params.b
 	c := Params.c
 
-	var n_roots int
+	var Nroots int
 
 	if (a == 0 && b != 0) || (a != 0 && c == 0 && b == 0) || (a == b && c == 0) {
-		n_roots = 1
+		Nroots = 1
 	} else if a == 0 && b == 0 {
-		n_roots = 0
+		Nroots = 0
 	} else {
 		D := b*b - 4*a*c
 		if D < 0 {
-			n_roots = 0
+			Nroots = 0
 		} else if D > 0 {
-			n_roots = 2
+			Nroots = 2
 		} else {
-			n_roots = 1
+			Nroots = 1
 		}
 	}
 
 	p := ParamsAnswer{
-		a:       a,
-		b:       b,
-		c:       c,
-		n_roots: n_roots,
+		A:      a,
+		B:      b,
+		C:      c,
+		Nroots: Nroots,
 	}
 	ParamsAnswers = append(ParamsAnswers, p)
 }

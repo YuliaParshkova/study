@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "6aee6571-5156-d036-c811-44fbb85b0767",
+		"name": "new",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/parametersRes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"parametersRes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/parameters/1/2/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"parameters",
+						"1",
+						"2",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
