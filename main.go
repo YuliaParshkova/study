@@ -3,11 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/fatih/structs"
 	"github.com/gorilla/mux"
-	"io/ioutil"
+	//"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func main() {
@@ -35,30 +35,34 @@ type ParamsAnswer struct {
 }
 
 var ParamsAnswers []ParamsAnswer
-var m map[string]interface{}
+var Params Parameters
 
 func GetParameters(w http.ResponseWriter, r *http.Request) {
-	reqBody, _ := ioutil.ReadAll(r.Body)
-	var par Parameters
-	json.Unmarshal(reqBody, &par)
+	vars := mux.Vars(r)
+	var err error
+	Params.a, err = strconv.Atoi(vars["a"])
+	Params.b, err = strconv.Atoi(vars["b"])
+	Params.c, err = strconv.Atoi(vars["c"])
+	if err != nil {
+		json.NewEncoder(w).Encode("ошибка")
+	}
 
-	m = structs.Map(par)
 	CalcResult()
 }
 
 func GetLastResult(w http.ResponseWriter, r *http.Request) {
 	if len(ParamsAnswers) == 0 {
 		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode("Ничего не нашли")
+		json.NewEncoder(w).Encode("Ничего нет")
 	} else {
 		json.NewEncoder(w).Encode(ParamsAnswers[len(ParamsAnswers)-1])
 	}
 }
 
 func CalcResult() {
-	a := m["a"].(int)
-	b := m["b"].(int)
-	c := m["c"].(int)
+	a := Params.a
+	b := Params.b
+	c := Params.c
 
 	var n_roots int
 
