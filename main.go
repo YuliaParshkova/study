@@ -31,7 +31,7 @@ type ParamsAnswer struct {
 	a       int `json:"A"`
 	b       int `json:"B"`
 	c       int `json:"C"`
-	n_roots int `json:"Roots"`
+	n_roots int `json:"N_Roots"`
 }
 
 var ParamsAnswers []ParamsAnswer
@@ -64,10 +64,8 @@ func CalcResult() {
 
 	if (a == 0 && b != 0) || (a != 0 && c == 0 && b == 0) || (a == b && c == 0) {
 		n_roots = 1
-		return
 	} else if a == 0 && b == 0 {
 		n_roots = 0
-		return
 	} else {
 		D := b*b - 4*a*c
 		if D < 0 {
